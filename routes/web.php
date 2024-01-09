@@ -24,6 +24,7 @@ use \App\Http\Livewire\LoginComponent;
 use \App\Http\Livewire\RegisterComponent;
 use \App\Http\Livewire\DshboardComponent;
 use \App\Http\Controllers;
+use \App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +82,6 @@ Route::post('/login-user',[CustomAuthController::class,'loginUser'])->name('logi
 Route::get('/logout',[CustomAuthController::class,'logout'])->name('logout');
 
 
-
 ////////////////////dashboard
 Route::middleware('isLoggedIn')->group(function (){
     Route::get('/dashboard',DshboardComponent::class)->name('dashboard');
@@ -95,3 +95,4 @@ Route::middleware('isLoggedIn')->group(function (){
     Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.addproduct');
     Route::get('/admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.editproduct');
 });
+Route::get('welcome', [Controller::class, 'show_welcome']);
