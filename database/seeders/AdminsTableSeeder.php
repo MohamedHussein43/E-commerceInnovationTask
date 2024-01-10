@@ -15,15 +15,15 @@ class AdminsTableSeeder extends Seeder
     public function run()
     {
         $adminRecords = [
-            ['id' =>1,
-            'name' =>'Super Admin',
-            'type' =>'superadmin',
-            'vendor_id' =>0,
-            'mobile' =>'01215105',
-            'email' =>'admin@admin.com',
+            ['id' =>2,
+            'name' =>'John',
+            'type' =>'vendor',
+            'vendor_id' =>1,
+            'mobile' =>'12345678',
+            'email' =>'john@admin.com',
             'password' =>'$2y$10$YbxEd6hZY5v2E4u28O4Av.8Bi5vx2ZvVsGo9EWY7La3ImO/.rZ3hK',
             'image' => '',
-            'status' => 1],
+            'status' => 0],
         ];
         Admin::insert($adminRecords);
     }
