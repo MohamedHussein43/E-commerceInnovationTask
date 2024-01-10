@@ -12,6 +12,10 @@ class AdminAddCategoryComponent extends Component
     public $name;
     public $slug;
     public $parentCategory;
+    public $categories;
+    public function mount(){
+        $this->categories = Category::all();
+    }
     public  function generateslug(){
         $this->slug = Str::slug($this->name);
     }
@@ -28,6 +32,8 @@ class AdminAddCategoryComponent extends Component
         $category = new Category();
         $category->name = $name;
         $category->slug = Str::slug($name);
+        $category->parent_id = $this->parentCategory;
+
         $category->save();
         session()->flash('message','Category has been created successfully!');
         return 1;

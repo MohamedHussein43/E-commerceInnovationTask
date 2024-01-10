@@ -9,6 +9,10 @@ class Category extends Model
 {
     use HasFactory;
     protected $table = "categories";
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
@@ -17,5 +21,17 @@ class Category extends Model
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id');
+    }
+    public function allProducts()
+    {
+        $products = $this->products;
+
+        foreach ($this->children as $child) {
+            if ($childProducts = $child->allProducts()) {
+                $products = $products->merge($childProducts);
+            }
+        }
+
+        return $products;
     }
 }

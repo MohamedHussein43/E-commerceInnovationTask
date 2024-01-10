@@ -6,12 +6,19 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Vendor;
 use Livewire\Component;
 use Session;
 use Auth;
 class DshboardComponent extends Component
 {
     public $totalamount;
+    public $vendors;
+    public $tableType = 0;
+
+    public function userOrVendor($type){
+        $this->tableType = $type;
+    }
 
     public function render()
     {
@@ -19,10 +26,11 @@ class DshboardComponent extends Component
         $orders =array();
         $ordersItems =array();
 
-        if(Auth::guard('admin')){
+        if(Auth::guard('admin')->user()->type == 'superadmin'){
             $users = User::all();
             $orders = Order::all();
             $ordersItems = OrderItem::all();
+            $this->vendors = Vendor::all();
         }
         $popular_products = Product::inRandomOrder()->limit(8)->get();
         $latest_products = Product::inRandomOrder()->limit(8)->get();

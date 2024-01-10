@@ -18,4 +18,17 @@ class GetController extends Controller
     public function ListCategories(){
         return Category::all();
     }
+    public function GetProductByCategoryId($id = null){
+        $category = Category::find($id);
+        $categoryChildren = $category->children;
+        $products = $category->allProducts();
+        foreach ($categoryChildren as $child) {
+            $names[] = $child['name'];
+        }
+        return response()->json([
+            "Category Name" => $category->name,
+            "Categroy Children" => $names,
+            "products" => $products,
+        ],200);
+    }
 }

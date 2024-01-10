@@ -32,10 +32,16 @@
                                 </div>
                             </div>
 
+                
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Parent Category</label>
                                 <div class="col-md-4">
-                                    <input type="text" required placeholder="Parent Category" class="form-control input-md" wire:model="parentCategory"/>
+                                    <select class="form-control" required wire:model="parentCategory">
+                                        <option value="">Select Category</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 

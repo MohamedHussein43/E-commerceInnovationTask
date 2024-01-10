@@ -12,6 +12,7 @@ class CategoryComponent extends Component
     public $sorting;
     public $pagesize;
     public $category_slug;
+    public $categoryChildren;
     public function mount($category_slug){
         $this->sorting = "default";
         $this->pagesize = 12;
@@ -43,7 +44,9 @@ class CategoryComponent extends Component
         else{
             $products = Product::where('category_id',$category_id)->paginate($this->pagesize);
         }
-        $categories = Category::all();
+        $products = $category->allProducts();
+        $categories = Category::where('parent_id', null)->get();
+        $this->categoryChildren = $category->children;
         return view('livewire.category-component',['products'=>$products,'categories'=>$categories,'category_name'=>$category_name])->layout('layouts.base');
     }
 }

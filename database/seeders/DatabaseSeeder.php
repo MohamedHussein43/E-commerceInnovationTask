@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         //Product::factory(22)->create();
         //$this->call(AdminsTableSeeder::class);
         //$this->call(VendorsTableSeeder::class);
-        $this->call(VendorsDetailsTableSeeder::class);
+        //$this->call(VendorsDetailsTableSeeder::class);
+        $this->call(VendorsBankDetailsTableSeeder::class);
     }
 }

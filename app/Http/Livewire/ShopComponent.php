@@ -25,7 +25,7 @@ class ShopComponent extends Component
     public function render()
     {
             $products = Product::paginate(12);
-            $categories = Category::all();
+            $categories = Category::where('parent_id', null)->get();
             $popular_products = Product::inRandomOrder()->limit(4)->get();
         return view('livewire.shop-component',['products'=>$products,'categories'=>$categories,'popular_products'=>$popular_products])->layout('layouts.base');
     }

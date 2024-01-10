@@ -2,69 +2,98 @@
     <div class="container">
         <!--DashBoard-->
         <h1 style="font-size: 40px;color: black; font-weight:bold;">DashBoard</h1>
-        <div class="values">
-            <div class="val-Box">
-                <i class="fas fa-users"aria-hidden="true"></i>
-                <div>
-                    <h3>{{$users->count()}}</h3>
-                    <span>New Users</span>
+        @if(Auth::guard('admin')->user()->type == 'superadmin')
+            <div class="values">
+                <div class="val-Box" wire:click="userOrVendor('0')">
+                    <i class="fas fa-users"aria-hidden="true"></i>
+                    <div>
+                        <h3>{{$users->count()}}</h3>
+                        <span>Users</span>
+                    </div>
                 </div>
-            </div>
-            <div class="val-Box">
-                <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-                <div>
-                    <h3>{{$orders->count()}}</h3>
-                    <span>Total Orders</span>
+                <div class="val-Box" wire:click="userOrVendor('1')">
+                    <i class="fas fa-users"aria-hidden="true"></i>
+                    <div>
+                        <h3>{{$vendors->count()}}</h3>
+                        <span>Vendors</span>
+                    </div>
                 </div>
-            </div>
-            <div class="val-Box">
-                <i class="fas fa-dollar"aria-hidden="true"></i>
-                <div>
-                    <h3>${{$orders->sum('total')}}</h3>
-                    <span>Total Profits</span>
+                
+                <div class="val-Box">
+                    <i class="fas fa-dollar"aria-hidden="true"></i>
+                    <div>
+                        <h3>${{$orders->sum('total')}}</h3>
+                        <span>Total Profits</span>
+                    </div>
                 </div>
-            </div>
-            <div class="val-Box">
-                <i class="fas fa-cloud"aria-hidden="true"></i>
-                <div>
-                    <h3>{{$ordersItems->count()}}</h3>
-                    <span>Products Sell</span>
+                <div class="val-Box">
+                    <i class="fas fa-cloud"aria-hidden="true"></i>
+                    <div>
+                        <h3>{{$ordersItems->count()}}</h3>
+                        <span>Products Sell</span>
+                    </div>
                 </div>
-            </div>
 
-        </div> <!--end dashboard-->
-        <h1 style="font-size: 40px;color: black; font-weight:bold; text-align: center;">Users</h1>
-        @if(Session::has('message'))
-            <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
-        @endif
-        @if(Session::has('danger'))
-            <div class="alert alert-danger" role="alert">{{Session::get('danger')}}</div>
-        @endif
-        <dir class="board">
-            <table width="100%">
-                <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>First Name</td>
-                    <td>Last Name</td>
-                    <td>Email</td>
-                    <td>Action</td>
-                </tr>
-                </thead>
-                <tbody>
-                     @foreach($users as $user)
-                    <tr>
-                        <td>{{$user['id']}}</td>
-                        <td>{{$user['first_name']}}</td>
-                        <td>{{$user['last_name']}}</td>
-                        <td>{{$user['email']}}</td>
-                        <td><a href={{"deleteUser/".$user['id']}}> <i class="fa fa-times fa-2x  text-danger"></i></a></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            </div> <!--end dashboard-->
+            <h1 style="font-size: 40px;color: black; font-weight:bold; text-align: center;">Users</h1>
+            @if(Session::has('message'))
+                <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
+            @endif
+            @if(Session::has('danger'))
+                <div class="alert alert-danger" role="alert">{{Session::get('danger')}}</div>
+            @endif
+            <dir class="board">
+                @if($tableType == 0)
+                    <table width="100%">
+                        <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>First Name</td>
+                            <td>Last Name</td>
+                            <td>Email</td>
+                            <td>Action</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($users as $user)
+                            <tr>
+                                <td>{{$user['id']}}</td>
+                                <td>{{$user['first_name']}}</td>
+                                <td>{{$user['last_name']}}</td>
+                                <td>{{$user['email']}}</td>
+                                <td><a href={{"deleteUser/".$user['id']}}> <i class="fa fa-times fa-2x  text-danger"></i></a></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <table width="100%">
+                        <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Name</td>
+                            <td>Mobile</td>
+                            <td>Email</td>
+                            <td>Status</td>
+                            <td>Action</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($vendors as $vendor)
+                            <tr>
+                                <td>{{$vendor['id']}}</td>
+                                <td>{{$vendor['name']}}</td>
+                                <td>{{$vendor['mobile']}}</td>
+                                <td>{{$vendor['email']}}</td>
+                                <td>{{$vendor['status']}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
 
-        </dir>
+            </dir>
+        @endif
 
 
 
