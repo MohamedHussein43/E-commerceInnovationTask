@@ -33,6 +33,13 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-4 control-label">Parent Category</label>
+                                <div class="col-md-4">
+                                    <input type="text" required placeholder="Parent Category" class="form-control input-md" wire:model="parentCategory"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
                                 <div class="col-md-4">
                                     <button class="btn btn-primary">Submit</button>

@@ -14,13 +14,14 @@
                     <div class=" main-content-area">
                         <div class="wrap-login-item ">
                             <div class="login-form form-item form-stl">
-                                <form name="frm-login" action="" method="post">
-                                    
-                                    @if(Session::has('success'))
-                                        <div class="alert alert-success">{{Session::get('success')}}</div>
-                                    @endif
-                                    @if(Session::has('fail'))
-                                        <div class="alert alert-danger">{{Session::get('fail')}}</div>
+                                <form name="frm-login" wire:submit.prevent="save">
+                                    @if(Session::has('error_message'))
+                                        <div class="alert alert-danger">{{Session::get('error_message')}}</div>
+                                     @endif
+                                    @if($errors->any())
+                                        @foreach($errors->all() as $error)
+                                            <div class="alert alert-danger">{{$error}}</div>
+                                        @endforeach
                                     @endif
                                     @csrf
                                     <fieldset class="wrap-title">
@@ -28,12 +29,12 @@
                                     </fieldset>
                                     <fieldset class="wrap-input">
                                         <label for="validationDefaultUsername" class="form-label">Email Address:</label>
-                                        <input type="email" class="form-control" name="email" value="{{old('email')}}" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required placeholder="Type your email address">
+                                        <input type="email" class="form-control" wire:model.prevent="email" name="email" value="{{old('email')}}" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required placeholder="Type your email address">
                                         <span class="text-danger">@error('email'){{$message}}@enderror</span>
                                     </fieldset>
                                     <fieldset class="wrap-input">
                                         <label for="validationDefault03" class="form-label">Password:</label>
-                                        <input type="password" name="password" class="form-control" id="validationDefault03" required placeholder="Password">
+                                        <input type="password" name="password" class="form-control" wire:model.prevent="password" id="validationDefault03" required placeholder="Password">
                                         <span class="text-danger">@error('password'){{$message}}@enderror</span>
                                     </fieldset>
                                     <input type="submit" class="btn btn-submit">

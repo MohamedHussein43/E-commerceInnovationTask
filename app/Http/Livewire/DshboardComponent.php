@@ -8,16 +8,18 @@ use App\Models\Product;
 use App\Models\User;
 use Livewire\Component;
 use Session;
+use Auth;
 class DshboardComponent extends Component
 {
     public $totalamount;
+
     public function render()
     {
         $users =array();
         $orders =array();
         $ordersItems =array();
 
-        if(Session::has('loginId')){
+        if(Auth::guard('admin')){
             $users = User::all();
             $orders = Order::all();
             $ordersItems = OrderItem::all();

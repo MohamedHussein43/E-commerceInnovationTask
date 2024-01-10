@@ -14,6 +14,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Hash;
 use Session;
+use Auth;
 class CustomAuthController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -78,6 +79,11 @@ class CustomAuthController extends BaseController
             session()->flush();
             return redirect('login-user');
         }
+    }
+    public function adminLogout(){
+        Auth::guard('admin')->logout();
+        session()->flush();
+        return redirect('/admin/login');
     }
     public function deleteUser($id){
         $data = User::find($id);

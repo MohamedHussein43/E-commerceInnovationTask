@@ -83,11 +83,13 @@ Route::post('/register-user',[CustomAuthController::class,'registerUser'])->name
 Route::post('/login-user',[CustomAuthController::class,'loginUser'])->name('login-user');
 
 Route::get('/logout',[CustomAuthController::class,'logout'])->name('logout');
+Route::get('/admin/logout',[CustomAuthController::class,'adminLogout'])->name('admin.logout');
 
 
 ////////////////////dashboard
-Route::middleware('isLoggedIn')->group(function (){
-    Route::get('/dashboard',DshboardComponent::class)->name('dashboard');
+//Route::middleware('isLoggedIn')->group(function (){
+    Route::middleware('admin')->group(function (){
+    
     Route::get('/deleteUser/{id}',[CustomAuthController::class,'deleteUser'])->name('deleteUser');
     Route::get('/deleteCategory/{id}',[CustomAuthController::class,'deleteCategory'])->name('deleteCategory');
     Route::get('/deleteProduct/{id}',[CustomAuthController::class,'deleteProduct'])->name('deleteProduct');
@@ -98,10 +100,12 @@ Route::middleware('isLoggedIn')->group(function (){
     Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.addproduct');
     Route::get('/admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.editproduct');
 });
-/*Route::prefix('/admin')->group(function (){
-Route::match(['get', 'post'],'login',[AdminController::class,'login']);
-});*/
-Route::get('/admin/login', AdminLogin::class);
+Route::prefix('/admin')->group(function (){
+Route::match(['get', 'post'],'login',AdminLogin::class);
+});
+/*Route::get('/admin/login', AdminLogin::class);
+Route::post('/admin/login', AdminLogin::class);*/
 Route::middleware('admin')->group(function (){
+Route::get('/dashboard',DshboardComponent::class)->name('dashboard');
 Route::get('welcome', [Controller::class, 'show_welcome']);
 });

@@ -36,6 +36,7 @@
                                     <td>ID</td>
                                     <td>Category Name</td>
                                     <td>Slug</td>
+                                    <td>Parent Category</td>
                                     <td>Action</td>
                                 </tr>
                                 </thead>
@@ -45,6 +46,11 @@
                                         <td>{{$category->id}}</td>
                                         <td>{{$category->name}}</td>
                                         <td>{{$category->slug}}</td>
+                                        @if($category->parent_id)
+                                            <td>{{$category->parent_id}}</td>
+                                        @else
+                                            <td>Root Category</td>
+                                        @endif
                                         <td>
                                             <a href="{{route('admin.editcategory',['category_slug'=>$category->slug])}}" style="margin-left: 10px;"><i class="fa fa-edit fa-2x"> </i></a>
                                             <a href={{"/deleteCategory/".$category['id']}}><i class="fa fa-times fa-2x  text-danger"></i></a>

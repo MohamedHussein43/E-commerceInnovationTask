@@ -39,9 +39,9 @@
                     <div class="topbar-menu right-menu">
                         <ul>
                             @if(Session::has('loginId'))
-                                    @if(Session::get('utype')=='ADM')
+                                    @if(Auth::guard('admin')->check())
                                         <li class="menu-item menu-item-has-children parent" >
-                                            <a title="My Account" href="#">My Account({{Session::get('first_name')}})<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                            <a title="My Account" href="#">My Account({{Auth::guard('admin')->user()->name}})<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                             <ul class="submenu curency" >
                                                 <li class="menu-item" >
                                                     <a title="Profile" href="{{route('profile')}}">Profile</a>
@@ -56,7 +56,7 @@
                                                     <a title="Products" href="{{route('admin.products')}}">All Products</a>
                                                 </li>
                                                 <li class="menu-item" >
-                                                    <a title="Register or Login" href="{{route('logout')}}">Logout</a>
+                                                    <a title="Register or Login" href="{{route('admin.logout')}}">Logout</a>
                                                 </li>
                                             </ul>
                                         </li>

@@ -9,4 +9,13 @@ class Category extends Model
 {
     use HasFactory;
     protected $table = "categories";
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
 }
