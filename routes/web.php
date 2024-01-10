@@ -8,6 +8,7 @@ use App\Http\Livewire\Admin\AdminCategoryComponent;
 use App\Http\Livewire\Admin\AdminEditCategoryComponent;
 use App\Http\Livewire\Admin\AdminEditProductComponent;
 use App\Http\Livewire\Admin\AdminProductComponent;
+use App\Http\Livewire\Admin\AdminLogin;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\EditProfileComponent;
@@ -25,6 +26,8 @@ use \App\Http\Livewire\RegisterComponent;
 use \App\Http\Livewire\DshboardComponent;
 use \App\Http\Controllers;
 use \App\Http\Controllers\Controller;
+use \App\Http\Controllers\Admin\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -95,4 +98,10 @@ Route::middleware('isLoggedIn')->group(function (){
     Route::get('/admin/product/add', AdminAddProductComponent::class)->name('admin.addproduct');
     Route::get('/admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.editproduct');
 });
+/*Route::prefix('/admin')->group(function (){
+Route::match(['get', 'post'],'login',[AdminController::class,'login']);
+});*/
+Route::get('/admin/login', AdminLogin::class);
+Route::middleware('admin')->group(function (){
 Route::get('welcome', [Controller::class, 'show_welcome']);
+});
