@@ -14,7 +14,8 @@
                     <div class=" main-content-area">
                         <div class="wrap-login-item ">
                             <div class="login-form form-item form-stl">
-                                <form name="frm-login" action="{{route('login-user')}}" method="post">
+                                <form name="frm-login" action="" method="post">
+                                    
                                     @if(Session::has('success'))
                                         <div class="alert alert-success">{{Session::get('success')}}</div>
                                     @endif
@@ -23,7 +24,7 @@
                                     @endif
                                     @csrf
                                     <fieldset class="wrap-title">
-                                        <h3 class="form-title">Log in to your account</h3>
+                                        <h3 class="form-title">Admins Login</h3>
                                     </fieldset>
                                     <fieldset class="wrap-input">
                                         <label for="validationDefaultUsername" class="form-label">Email Address:</label>
