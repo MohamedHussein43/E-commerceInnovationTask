@@ -86,7 +86,7 @@
                 </div><!-- Categories widget-->
 
                 <div class="widget mercado-widget widget-product">
-                    <h2 class="widget-title">Popular Products</h2>
+                    <h2 class="widget-title">Latest Products</h2>
                     <div class="widget-content">
                         <ul class="products">
                            @foreach($popular_products as $p_product)

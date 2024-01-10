@@ -28,6 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     Route::get('ListProducts/{id?}',[GetController::class,'ListProducts'] );
     Route::get('GetProductByName/{name?}',[GetController::class,'GetProductByName'] );
     Route::get('GetProductByCategoryId/{id?}',[GetController::class,'GetProductByCategoryId'] );
+    Route::get('GetLatestProducts',[GetController::class,'GetLatestProducts'] );
+
 
     Route::get('ListCategories',[GetController::class,'ListCategories'] );
     Route::post('SetCategory',[SetController::class,'setCategory'] );

@@ -31,4 +31,24 @@ class GetController extends Controller
             "products" => $products,
         ],200);
     }
+
+    public function GetLatestProducts(){
+        $categories = Category::all();
+        $latestProducts = [];
+        foreach ($categories as $category) {
+            // Retrieve the latest product for each category
+            $latestProduct = $category->products()->latest()->first();
+
+            if ($latestProduct) {
+                $latestProducts[] = [
+                    'category_name' => $category->name,
+                    'latest_product' => $latestProduct,
+                ];;
+            }
+        }
+        return $latestProducts; 
+        return response()->json([
+            "Result" => $latestProducts,
+        ],200);
+    }
 }

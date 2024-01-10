@@ -13,6 +13,7 @@ class CategoryComponent extends Component
     public $pagesize;
     public $category_slug;
     public $categoryChildren;
+    public $popular_products;
     public function mount($category_slug){
         $this->sorting = "default";
         $this->pagesize = 12;
@@ -24,7 +25,23 @@ class CategoryComponent extends Component
         Cart::add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
         session()->flash('success_message','Item added in Cart');
         return redirect()->route('product.cart');
+    
     }
+
+    private function getLatest(){
+        $categories = Category::all();
+        $latestProducts = [];
+        foreach ($categories as $category) {
+            // Retrieve the latest product for each category
+            $latestProduct = $category->products()->latest()->first();
+
+            if ($latestProduct) {
+                $latestProducts[] = $latestProduct;
+            }
+        }
+        return $latestProducts;
+    }
+
     use WithPagination;
     public function render()
     {
@@ -46,6 +63,7 @@ class CategoryComponent extends Component
         }
         $products = $category->allProducts();
         $categories = Category::where('parent_id', null)->get();
+        $this->popular_products = $this->getLatest();
         $this->categoryChildren = $category->children;
         return view('livewire.category-component',['products'=>$products,'categories'=>$categories,'category_name'=>$category_name])->layout('layouts.base');
     }
