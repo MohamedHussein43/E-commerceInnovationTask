@@ -15,7 +15,7 @@ class VendorsTableSeeder extends Seeder
     public function run()
     {
         $vendorRecords = [
-            ['id' => 1, 'name' => 'John','email' => 'john@admin.com','password' => '$2y$10$YbxEd6hZY5v2E4u28O4Av.8Bi5vx2ZvVsGo9EWY7La3ImO/.rZ3hK', 'mobile' => '12345678', 'status' => 0],
+            ['id' => 2, 'name' => 'Tarek','email' => 'tarek@admin.com','password' => '$2y$10$YbxEd6hZY5v2E4u28O4Av.8Bi5vx2ZvVsGo9EWY7La3ImO/.rZ3hK', 'mobile' => '12345678', 'status' => 0],
         ];
         Vendor::insert($vendorRecords);
     }

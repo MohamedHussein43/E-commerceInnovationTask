@@ -9,7 +9,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-
+use Auth;
 class AdminAddProductComponent extends Component
 {
     use WithFileUploads;
@@ -83,6 +83,9 @@ class AdminAddProductComponent extends Component
             $product->image = $imageName;
 
             $product->category_id = $category_id;
+            if(Auth::guard('admin')){
+                $product->vendor_id = Auth::guard('admin')->user()->vendor_id;
+            }
             $product->save();
             session()->flash('message','Product has been created successfully!');
             return 1;
