@@ -17,10 +17,12 @@ class AdminLogin extends Component
     {
         if(Auth::guard('admin')->attempt(['email'=>$this->email, 'password'=>$this->password, 'status'=>1]))
         {
-            $this->email = "from save";    
-            $this->password = "password form save";
+            
             session()->put('loginId',1);
-            return redirect("/dashboard");
+            if (Auth::guard('admin')->user()->type == 'superadmin')
+                return redirect("/dashboard");
+            else if (Auth::guard('admin')->user()->type == 'vendor')
+                return redirect("/admin/products");
         }
         else{ 
          return redirect()->back()->with("error_message","Invalid email or password!");

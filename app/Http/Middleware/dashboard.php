@@ -4,8 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
-class Admin
+
+class dashboard
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Auth::guard('admin')->check()){
-            return redirect('/admin/login');
+        if(true){
+            return redirect('/admin/products');
         }
         return $next($request);
     }

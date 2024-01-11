@@ -46,9 +46,11 @@
                                                 <li class="menu-item" >
                                                     <a title="Profile" href="{{route('profile')}}">Profile</a>
                                                 </li>
-                                                <li class="menu-item" >
-                                                    <a title="Dashboard" href="{{route('dashboard')}}">Dashboard</a>
-                                                </li>
+                                                @if(Auth::guard('admin')->user()->type == 'superadmin')
+                                                    <li class="menu-item" >
+                                                        <a title="Dashboard" href="{{route('dashboard')}}">Dashboard</a>
+                                                    </li>
+                                                @endif
                                                 <li class="menu-item">
                                                     <a title="Categories" href="{{route('admin.categories')}}">Categories</a>
                                                 </li>

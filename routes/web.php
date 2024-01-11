@@ -105,7 +105,7 @@ Route::match(['get', 'post'],'login',AdminLogin::class);
 });
 /*Route::get('/admin/login', AdminLogin::class);
 Route::post('/admin/login', AdminLogin::class);*/
-Route::middleware('admin')->group(function (){
+Route::middleware(['admin','dashboard'])->group(function (){
 Route::get('/dashboard',DshboardComponent::class)->name('dashboard');
 Route::get('welcome', [Controller::class, 'show_welcome']);
 });
