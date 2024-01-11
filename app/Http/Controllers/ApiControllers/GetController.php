@@ -20,17 +20,23 @@ class GetController extends Controller
     }
     public function GetProductByCategoryId($id = null){
         $category = Category::find($id);
-        $categoryChildren = $category->children;
-        $products = $category->allProducts();
-        foreach ($categoryChildren as $child) {
-            $names[] = $child['name'];
+        if ($category){
+            $categoryChildren = $category->children;
+            $products = $category->allProducts();
+            $names = [];
+            foreach ($categoryChildren as $child) {
+                $names[] = $child['name'];
+            }
+            return response()->json([
+                "Category Name" => $category->name,
+                "Categroy Children" => $names,
+                "products" => $products,
+            ],200);
         }
-        return response()->json([
-            "Category Name" => $category->name,
-            "Categroy Children" => $names,
-            "products" => $products,
+        else return response()->json([
+            "Result" => "This Category Does Not Exist!",
         ],200);
-    }
+        }
 
     public function GetLatestProducts(){
         $categories = Category::all();
