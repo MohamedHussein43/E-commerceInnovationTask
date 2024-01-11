@@ -17,8 +17,9 @@
                                         <div class="m-b-25">
                                             <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image">
                                         </div>
-                                        @if(Session::get('utype')=='ADM')
+                                        @if(Auth::guard('admin'))
                                             <h6 class="f-w-600">Hello Admin</h6>
+                                            
                                         @else
                                             <h6 class="f-w-600">Hello Customer</h6>
                                         @endif
@@ -32,6 +33,9 @@
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Name</p>
                                                 <h6 class="text-muted f-w-400">{{$user->first_name}} {{$user->last_name}}</h6>
+                                                @if(Auth::guard('admin'))
+                                                    <h6 class="f-w-600">{{$user->name}}</h6>
+                                                @endif
                                             </div>
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Email</p>
@@ -40,6 +44,9 @@
                                             <div class="col-sm-6">
                                                 <p class="m-b-10 f-w-600">Phone</p>
                                                 <h6 class="text-muted f-w-400">{{$user->phone}}</h6>
+                                                @if(Auth::guard('admin'))
+                                                    <h6 class="f-w-600">{{$user->mobile}}</h6>
+                                                @endif
                                             </div>
                                         </div>
                                         <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Processes</h6>
