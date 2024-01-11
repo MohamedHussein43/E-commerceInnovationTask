@@ -7,6 +7,7 @@ use App\Models\OrderItem;
 use App\Models\Shipping;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Product;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -149,7 +150,13 @@ class CheckoutComponent extends Component
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
             $orderItem->quantity = $item->qty;
-            $orderItem->save();
+            $product = Product::find($item->id);
+            if($product->quantity >=$item->qty)
+            {
+                $product->quantity = $product->quantity - $item->qty;
+                $product->save();
+                $orderItem->save();
+            }
         }
 
         if ($this->ship_to_different)

@@ -48,7 +48,7 @@ class CartComponent extends Component
                 'discount'  => 0,
                 'subtotal'  =>Cart::subtotal(),
                 'tax'       =>Cart::tax(),
-                'total'     =>Cart::total()
+                'total'     =>(int)Cart::total(),
             ]);
 
 
