@@ -7,6 +7,7 @@ use App\Http\Controllers\ApiControllers\SetController;
 use App\Http\Controllers\ApiControllers\DeleteController;
 use App\Http\Controllers\ApiControllers\UpdateController;
 use App\Http\Controllers\ApiControllers\AuthController;
+use App\Http\Controllers\ApiControllers\PlaceOrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -43,5 +44,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //});
 
+Route::post('test',[SetController::class,'test']);
+Route::post('order',[PlaceOrderController::class,'placeOrder']);
 
 Route::post('login',[AuthController::class,'login']);

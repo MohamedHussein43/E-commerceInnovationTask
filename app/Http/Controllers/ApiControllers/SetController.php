@@ -65,6 +65,8 @@ class SetController extends Controller
                 }
     }
     }   
+    public function test (Request $req) {
+        return $req;   }
     
     //
 }
