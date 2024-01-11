@@ -21,7 +21,11 @@
 
                 <div class="wrap-shop-control">
 
-                    <h1 class="shop-title">Digital & Electronics</h1>
+                    <h1 class="shop-title">{{$category_name}}:
+                        @foreach($categoryChildren as $child)
+                            {{$child->name}} |
+                        @endforeach
+                    </h1>
 
                     </div>
 
@@ -56,12 +60,12 @@
 
                 </div>
 
-                        {{$products->links()}}
+                        {{--$products->links()--}}
         </div>
 
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 sitebar">
             <div class="widget mercado-widget categories-widget">
-                <h2 class="widget-title">All Categories</h2>
+                <h2 class="widget-title">Main Categories</h2>
                 <div class="widget-content">
                     <ul class="list-category">
                         @foreach($categories as $category)
@@ -75,7 +79,7 @@
 
 
             <div class="widget mercado-widget widget-product">
-                <h2 class="widget-title">Popular Products</h2>
+                <h2 class="widget-title">Latest Products</h2>
                 <div class="widget-content">
                     <ul class="products">
                         @foreach($popular_products as $p_product)

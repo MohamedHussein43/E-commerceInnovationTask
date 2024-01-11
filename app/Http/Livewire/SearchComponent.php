@@ -14,6 +14,8 @@ class SearchComponent extends Component
     public $search;
     public $product_cat;
     public $product_cat_id;
+    public $categoryChildren;
+    public $category_name;
 
     public function mount(){
         $this->sorting = "default";
@@ -26,11 +28,29 @@ class SearchComponent extends Component
         session()->flash('success_message','Item added in Cart');
         return redirect('/shop');
     }
+    private function getLatest(){
+        $categories = Category::all();
+        $latestProducts = [];
+        foreach ($categories as $category) {
+            // Retrieve the latest product for each category
+            $latestProduct = $category->products()->latest()->first();
+
+            if ($latestProduct) {
+                $latestProducts[] = $latestProduct;
+            }
+        }
+        return $latestProducts;
+    }
     public function render()
     {
             $products = Product::where('name','like','%'.$this->search .'%')->where('category_id','like','%'.$this->product_cat_id.'%')->paginate($this->pagesize);
-            $categories = Category::all();
-            $popular_products = Product::inRandomOrder()->limit(4)->get();
+            $categories = Category::where('parent_id', null)->get();
+            $popular_products = $this->getLatest();
+            $category = Category::find($this->product_cat_id);
+            
+            $this->category_name = $category->name;
+            $this->categoryChildren = $category->children;
+            $products = $category->allProducts();
 
         return view('livewire.search-component',['products'=>$products,'categories'=>$categories,'popular_products'=>$popular_products])->layout('layouts.base');
     }
