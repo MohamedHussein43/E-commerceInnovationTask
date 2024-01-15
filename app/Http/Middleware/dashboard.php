@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
+use Auth;
 class dashboard
 {
     /**
@@ -16,7 +16,7 @@ class dashboard
      */
     public function handle(Request $request, Closure $next)
     {
-        if(true){
+        if(!Auth::guard('admin')->user()->type == 'superadmin'){
             return redirect('/admin/products');
         }
         return $next($request);
