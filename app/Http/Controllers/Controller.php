@@ -11,6 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     public function show_welcome(){
+        event(new \App\Events\TestNotification('This is testing data'));
         return view('welcome');
     }
 }

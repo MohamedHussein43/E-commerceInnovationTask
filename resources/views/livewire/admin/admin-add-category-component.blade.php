@@ -36,13 +36,41 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Parent Category</label>
                                 <div class="col-md-4">
-                                    <select class="form-control" required wire:model="parentCategory">
+                                    <ul class="dropdown">
+                                        <a class="btn btn-secondary dropdown-toggle" style="margin-left: -20px" data-bs-auto-closs="outside" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{$parent_name}}
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            @foreach($categories as $category)
+                                                <li onmouseover="toggleSubmenu(this)" onmouseout="toggleSubmenu(this)">
+                                                    <a class="dropdown-item dropdown-toggle" style="cursor: pointer;"wire:click="selectedcategory('{{$category->name}}','{{$category->id}}')" data-bs-auto-closs="outside" role="button" id="dropdownMenuButton{{$category->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                                                        {{$category->name}}
+                                                    </a>
+                                                    @if(count($category->children))
+                                                        <ul class="submenu" style="display:none; position: absolute; top: 0; left: 100%; margin-top: 0;" aria-labelledby="dropdownMenuButton{{$category->id}}">
+                                                            @include('livewire/admin/manage-child',['children' => $category->children])
+                                                        </ul>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </ul>
+                                      
+                                    {{--<select class="form-control" required wire:model="parentCategory">
                                         <option value="">Select Category</option>
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                            
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                                <select class="form-control">
+                                                    @if(count($category->children))
+                                                        @include('livewire/admin/manage-child',['children' => $category->children])
+                                                    @endif
+                                                </select>
+                                            
                                         @endforeach
-                                    </select>
+                                    </select>--}}
                                 </div>
+                                
                             </div>
 
                             <div class="form-group">
@@ -57,4 +85,12 @@
             </div>
         </div>
     </div>
+    <script>
+        function toggleSubmenu(li) {
+            var submenu = li.querySelector('.submenu');
+            if (submenu) {
+                submenu.style.display = (submenu.style.display === 'none') ? 'block' : 'none'; // Toggle the display on hover
+            }
+        }
+    </script>
 </div>

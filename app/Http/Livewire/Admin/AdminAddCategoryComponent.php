@@ -13,11 +13,17 @@ class AdminAddCategoryComponent extends Component
     public $slug;
     public $parentCategory;
     public $categories;
+    public $parent_name;
     public function mount(){
-        $this->categories = Category::all();
+        $this->categories = Category::with('children')->whereNull('parent_id')->get();
+        $this-> parent_name = 'Select Parent Category';
     }
     public  function generateslug(){
         $this->slug = Str::slug($this->name);
+    }
+    public function selectedcategory($name,$id) {
+        $this->parent_name = $name;
+        $this->parentCategory = $id;
     }
     public function storeCategory(){
         $this -> setCategory($this->name);

@@ -10,6 +10,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{asset(('assets/images/favicon.ico'))}}">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic&amp;subset=latin,latin-ext" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open%20Sans:300,400,400italic,600,600italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/adminPanel.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/animate.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/font-awesome.min.css')}}">
@@ -21,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
 
     @livewireStyles
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body class="home-page home-01 ">
 <!--header-->
