@@ -4,7 +4,7 @@
             {{$category->name}}
         </a>
         @if(count($category->children))
-            <ul class="submenu" style="display:none; position: absolute; top: 0; left: 100%; margin-top: 0;" aria-labelledby="dropdownMenuButton{{$category->id}}">
+            <ul class="submenu" style="display:none; position: absolute; top: {{($loop->iteration-1)*20 }}px; left: 100%; margin-top: 0;" aria-labelledby="dropdownMenuButton{{$category->id}}">
                 @include('livewire/admin/manage-child',['children' => $category->children])
             </ul>
         @endif

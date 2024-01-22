@@ -42,6 +42,7 @@ class AdminAddCategoryComponent extends Component
 
         $category->save();
         session()->flash('message','Category has been created successfully!');
+        $this->mount();
         return 1;
     }
     public function render()
